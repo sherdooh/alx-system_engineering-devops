@@ -1,0 +1,4 @@
+#!/bin/usr/env bsah
+#bash scipt to conenct to a server
+
+ssh ubuntu -i ~/.ssh/school
