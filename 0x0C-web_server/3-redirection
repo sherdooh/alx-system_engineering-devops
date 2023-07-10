@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
-#redirections 
-#301 moved permanently
+#Script that configures nignx server to perform a 301-redirection to another page.
 
+#update packages&&install nginx
 sudo apt-get update
 sudo apt-get install -y nginx
 
-echo "Hello world!" | sudo tee /var/www/html/index.html
+#this is my index.html page
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
-string_for_replacement="server_name _;\n\tredirect_me https:\/\/github.com\/besthor permanent;"
+#301 Redirection
+string_for_replacement="server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/sherdooh permanent;"
+sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
 
-sudo sed -i "s/server_name _;/$string_for_replalcement/" /etc/nginx/sites-enabled/default
-
-sudo service nginx restart
+#restart nginx
+sudo sytemctl restart nginx
 
